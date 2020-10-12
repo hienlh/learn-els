@@ -4,26 +4,20 @@ import util from 'util';
 
 const client = new Client({ node: 'http://es01:9200' })
 
-const INDEX = 'users';
+const INDEX = 'messages';
 
 const main = async () => {
-    const dataset = Array.from(Array(100000).keys()).map((_, i) => ({
-        id: i,
-        name: faker.name.findName(),
-        birthday: faker.date.between(1900, "2010"),
-    }))
-    const body = dataset.flatMap(doc => [{ index: { _index: INDEX } }, doc])
-
-
     // Create mapping
     await client.indices.create({
         index: INDEX,
         body: {
             mappings: {
                 properties: {
-                    id: { type: 'integer' },
-                    name: { type: 'text' },
-                    birthday: { type: 'date' }
+                    id: { type: 'keyword' },
+                    renderId: { type: 'integer' },
+                    receiverId: { type: 'integer' },
+                    message: { type: 'text' },
+                    createdAt: { type: 'date' },
                 }
             }
         }

@@ -2,7 +2,7 @@ import { Client } from '@elastic/elasticsearch';
 import faker from 'faker/locale/vi';
 import util from 'util';
 
-const client = new Client({ node: 'http://172.26.0.4:9200' })
+const client = new Client({ node: 'http://es01:9200' })
 
 const INDEX = 'messages';
 

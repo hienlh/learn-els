@@ -1,5 +1,14 @@
 version: '2.2'
 services:
+  client:
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    volumes:
+      - .:/els-client:cached
+    command: sleep infinity
+    networks:
+      - elastic
   es01:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.9.2
     container_name: es01
